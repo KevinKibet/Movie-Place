@@ -1,14 +1,15 @@
 <% include ../views/partials/header %>
   
 
+<%movie.forEach((mov)=>{%>
+   <div>
+	<img src="<%= mov.cover %>">
+    <h3><%= mov.title%></h3>
+    <a href="/movies/details/<%= mov._id%>">Info</a>
+    </div>
+<%})%>
 
-<ul>
-<li>
-    <%= movie.id %>
-       
-        
-  </li>
- </ul>
+
 
 
 

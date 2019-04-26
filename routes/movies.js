@@ -2,6 +2,10 @@ const MoviesModel = require('../models/movie.js');
 const express = require('express');
 const router = express.Router();
 
+
+
+
+// movie listing
  router.get('/', (req, res)=>{
 
 MoviesModel.find({}, (err, movies)=>{
@@ -15,6 +19,12 @@ MoviesModel.find({}, (err, movies)=>{
     
 
  } )
+
+ //add movie form
+ router.get('/add', (req,res)=>{
+  res.render('addmovies');
+
+ })
 
 
  module.exports = router;
