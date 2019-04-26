@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const db = require('./lib/db');  
 
 //port
 const PORT =3000;
@@ -14,15 +15,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
+const movie = require('./routes/movies');
 
 // View Setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.get('/movie', (req,res)=>{
-	res.render('movie');
-})
+app.use('/', movie);
 
 app.listen(PORT, ()=>{
 	console.log('Server Listening on port '+PORT+'...')
