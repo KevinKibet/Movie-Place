@@ -1,11 +1,17 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const db = require('./lib/db');  
+const mongoose = require('mongoose');
+//const db = require('./lib/db');  
 const expressValidator = require('express-validator');
 
 //port
 const PORT =3000;
+
+// Mongoose Connect
+mongoose.connect('mongodb://localhost/MoviePlaceL');
+
+const db = mongoose.connection;
 
 //initialise the app
 const app = new express();

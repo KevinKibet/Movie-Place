@@ -59,7 +59,7 @@ MoviesModel.find({}, (err, movies)=>{
       	if(err){
       		res.send(err);
       	}else{
-      		res.redirect('/')
+      		return res.redirect('/movies')
       	}
       })
 
