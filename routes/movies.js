@@ -66,4 +66,22 @@ MoviesModel.find({}, (err, movies)=>{
  });
 
 
+
+ //Details page
+
+ router.get('/details/:id', (req, res)=>{
+
+MoviesModel.find({_id:req.params.id}, (err, movies)=>{
+  if(err){
+  	res.send(err);
+  }
+
+  res.render('details', { movie : movies} );
+
+})
+    
+
+ } )
+
+
  module.exports = router;

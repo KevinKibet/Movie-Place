@@ -5,6 +5,16 @@
     <title>Movie place</title>
   </head>
   <body>
+  	<header>
+        <div class="row">
+          <div class="columns large-8">
+            <h1><a href="/movies">MovieBase</a></h1>
+          </div>
+          <div class="columns large-4">
+            <a href="/movies/add" class="button right">Add Movies</a>
+          </div>
+        </div>
+      </header>
 
   <% if(typeof errors!=='undefined'){ %>
   <%  errors.forEach(function(err){ %>
