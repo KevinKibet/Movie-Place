@@ -83,5 +83,16 @@ MoviesModel.find({_id:req.params.id}, (err, movies)=>{
 
  } )
 
+ //Deleting a movie
+ router.delete('/delete/:id', (req,res)=>{
+
+ 	MoviesModel.remove({_id: req.params.id}, function(err){
+ 		if(err){
+ 			res.send(err);
+ 		}
+ 		res.status(204).send();
+ 	})
+ })
+
 
  module.exports = router;
