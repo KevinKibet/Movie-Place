@@ -5,3 +5,9 @@
     <title>Movie place</title>
   </head>
   <body>
+
+  <% if(typeof errors!=='undefined'){ %>
+  <%  errors.forEach(function(err){ %>
+    <li>  <%= err.msg %> </li>
+<%})%>
+  <%}%>

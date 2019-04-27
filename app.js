@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./lib/db');  
+const expressValidator = require('express-validator');
 
 //port
 const PORT =3000;
@@ -21,7 +22,28 @@ const movie = require('./routes/movies');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use('/', movie);
+
+// Express validator middleware
+app.use(expressValidator({
+  errorFormatter: (param, msg, value) => {
+      const namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+
+
+app.use('/movies', movie);
 
 app.listen(PORT, ()=>{
 	console.log('Server Listening on port '+PORT+'...')
