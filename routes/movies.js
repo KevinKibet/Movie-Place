@@ -94,5 +94,62 @@ MoviesModel.find({_id:req.params.id}, (err, movies)=>{
  	})
  })
 
+//edit a movie
+
+router.get('/edit/:id', (req, res)=>{
+
+MoviesModel.find({_id:req.params.id}, (err, movies)=>{
+  if(err){
+  	res.send(err);
+  }
+
+  res.render('edit', { movie : movies} );
+
+})
+
+ } )
+
+
+// Update Movie POST
+    router.post('/edit/:id', function(req, res){
+        req.checkBody('title','Title is required').notEmpty();
+
+        var errors = req.validationErrors();
+
+        if(errors){
+          Movie.find({_id: req.params.id}, function(err, movie){
+            if(err){
+              res.send(err);
+            }
+            res.render('edit', {errors:errors,movie: movie});
+          });
+        } else {
+          var title = req.body.title && req.body.title.trim();
+          var release_date = req.body.release_date && req.body.release_date.trim();
+          var genre = req.body.genre && req.body.genre.trim();
+          var director = req.body.director && req.body.director.trim();
+          var plot = req.body.plot && req.body.plot.trim();
+          var trailer= req.body.trailer && req.body.trailer.trim();
+          var cover = req.body.cover && req.body.cover.trim();
+
+          var updMovie = {
+            title: title,
+            release_date: release_date,
+            genre: genre,
+            director: director,
+            plot: plot,
+            cover: cover,
+            trailer: trailer
+          };
+
+          MoviesModel.update({_id:req.params.id}, updMovie, function(err){
+            if(err){
+              res.send(err);
+            }
+          return  res.redirect('/movies');
+          });
+        }
+    });
+
 
  module.exports = router;
