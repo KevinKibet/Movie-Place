@@ -32,7 +32,8 @@ MoviesModel.find({}, (err, movies)=>{
     req.checkBody('title','Title is required').notEmpty();
     var errors = req.validationErrors();
     if(errors){
-          res.render('addmovies',{errors: errors});
+          //res.render('addmovies',{errors: errors});
+          console.log(errors)
         } else {
           var title = req.body.title && req.body.title.trim();
           var release_date = req.body.release_date && req.body.release_date.trim();
@@ -117,7 +118,7 @@ MoviesModel.find({_id:req.params.id}, (err, movies)=>{
         var errors = req.validationErrors();
 
         if(errors){
-          Movie.find({_id: req.params.id}, function(err, movie){
+          MoviesModel.find({_id: req.params.id}, function(err, movie){
             if(err){
               res.send(err);
             }
@@ -149,6 +150,41 @@ MoviesModel.find({_id:req.params.id}, (err, movies)=>{
           return  res.redirect('/movies');
           });
         }
+    });
+
+
+
+
+    // Search movies
+    router.post('/search', function(req, res){
+        MoviesModel.search(req.body.searchText, {title: 1, plot: 1, cover: 1},{
+          conditions: {title:{$exists: true}, plot: {$exists: true}, cover:{$exists: true}},
+          sort: {title: 1},
+          limit: 10
+        }, function(err, movies){
+          if(err){
+            res.send(err);
+          }
+          var model = {
+            movie: movies.results
+          }
+          res.render('movie', model);
+        });
+    });
+
+    // Filter genre
+  router.get('/genre/:genre', function (req, res) {
+        MoviesModel.find({genre:req.params.genre}, function(err, movies){
+            if(err){
+                res.send(err);
+            }
+
+            var model = {
+                movie: movies
+            }
+
+           res.render('movie', model);
+        });
     });
 
 

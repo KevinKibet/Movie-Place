@@ -2,10 +2,10 @@
   
 
 <%movie.forEach((mov)=>{%>
-   <div>
-	<img src="<%= mov.cover %>">
+   <div class="large-4 columns end">
+	<img class="th" src="<%= mov.cover %>">
     <h3><%= mov.title%></h3>
-    <a href="/movies/details/<%= mov._id%>">Info</a>
+    <a class="button" href="/movies/details/<%= mov._id%>">Info</a>
     </div>
 <%})%>
 
@@ -13,4 +13,4 @@
 
 
 
-<% include ../views/partials/footer %>
+<% include ../views/partials/footer %> 

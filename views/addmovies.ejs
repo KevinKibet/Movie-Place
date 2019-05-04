@@ -1,10 +1,10 @@
 <% include ../views/partials/header %>
 
+<div class="row" style="margin-left:-350px; ">
 
-
-<div class="row">
       <a href="/movies">Go Back</a>
       <h2>Add Movie</h2>
+
       <form method="post" action="/movies/add">
         <div>
           <label> Title *
@@ -54,9 +54,8 @@
         </div>
         <input type="hidden" name="_csrf" value="{_csrf}">
       </form>
-    </div>
 
 
-
-
+</div>
+ 
 <% include ../views/partials/footer %>

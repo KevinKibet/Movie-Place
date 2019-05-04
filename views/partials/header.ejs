@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Movie place</title>
+    <link rel="stylesheet" href="/bowercomponents/foundation/css/foundation.css">
+        <link rel="stylesheet" href="/app.css">
   </head>
   <body>
   	<header>
@@ -15,9 +17,40 @@
           </div>
         </div>
       </header>
-
+      <div class=row >
+<div class="columns large-8">
   <% if(typeof errors!=='undefined'){ %>
   <%  errors.forEach(function(err){ %>
-    <li>  <%= err.msg %> </li>
+    <div class="alert-box alert">  <%= err.msg %> </div>
 <%})%>
   <%}%>
+</div>
+
+<div class="columns large-4 search">
+
+            <form method="post" action="/movies/search">
+              <input type="hidden" name="_csrf" value="{_csrf}">
+              <div class="row">
+                <div class="columns large-10">
+                    <input type="text" name="searchText" placeholder="Search Movies">
+                </div>
+                <div class="columns large-2">
+                  <input type="submit" value="Go" class="button tiny">
+                </div>
+              </div>
+            </form>
+
+            <div class="side-nav-wrap">
+                <h3>Movie Genres</h3>
+                <ul class="side-nav">
+                    <li><a href="/movies/genre/Action">Action</a></li>
+                   <li><a href="/movies/genre/Comedy">Comedy</a></li>
+                    <li><a href="/movies/genre/Drama">Drama</a></li>
+                    <li><a href="/movies/genre/Documentary">Documentary</a></li>
+                    <li><a href="/movies/genre/Horror">Horror</a></li>
+                    <li><a href="/movies/genre/Thriller">Thriller</a></li>
+                    <li><a href="/movies/genre/Other">Other</a></li>
+                </ul>
+            </div>
+         </div>
+

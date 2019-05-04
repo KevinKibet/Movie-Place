@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const searchPlugin = require('mongoose-search-plugin');
 
 const MoviesSchema = mongoose.Schema({
 	title: String,
@@ -9,6 +9,10 @@ const MoviesSchema = mongoose.Schema({
 	trailer: String,
 	cover: String
 });
+
+MoviesSchema.plugin(searchPlugin, {
+    fields: ['title', 'plot', 'cover']
+  });
 
 const Movies= mongoose.model('Movies', MoviesSchema);
 
